@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head><meta charset="UTF-8" /></head>
+
+<body>
+	<header th:fragment="header">
+		<div class="card">
+			<div th:replace="~{layout/fragments/navigation :: navigation}"></div>
+		</div>
+	</header>
+</body>
+</html>

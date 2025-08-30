@@ -1,0 +1,46 @@
+spring:
+  application:
+      name: Brewer
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/brewer?useTimezone=true&serverTimezone=UTC
+    username: cobrancaUser
+    password: cobranca
+    tomcat:
+      initial-size: 5
+      min-idle: 5
+      max-idle: 5
+
+  jpa:
+    open-in-view: true
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+
+  thymeleaf: # THYMELEAF (ThymeleafAutoConfiguration)
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    cache: false # Disable caching for development - set to false for hot refresh
+    servlet:
+      content-type: text/html
+
+logging:
+  file:
+    #path: /var/tmp
+    name: logging_brawer.log
+
+  level: # Log Level: ERROR, WARN, INFO, DEBUG, or TRACE
+    root: "INFO"
+    '[org.hibernate]': "DEBUG"
+    '[org.hibernate.SQL]': "DEBUG"
+    '[br.com.zuco]': "DEBUG"

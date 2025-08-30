@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Brewer</title>
+    <link rel="icon" th:href="@{/images/favicon.png}" />
+
+	<!-- CSS -->
+    <!--Bootstrap 5.3.6-->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+
+    <!--Font Awesome free-6.7.2-web-->
+    <link rel="stylesheet" th:href="@{/css/fontawesome/css/all.css}"/>
+
+    <!--Google Fonts-->
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}"/>
+    <link rel="stylesheet" th:href="@{/css/google_fonts.css}"/>
+
+    <!--Custom-->
+    <link rel="stylesheet" th:href="@{/css/custom.css}"/>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+	<header th:replace="~{layout/fragments/header :: header}">
+	    <p>Cabeçalho</p>
+	</header>
+	
+	<main class="container" layout:fragment="main">
+		<p>Conteúdo principal</p>
+	</main>
+	
+	<footer th:replace="~{layout/fragments/footer :: footer}">
+	   <p>Rodapé</p>
+	</footer>
+	
+	<!-- JS -->
+	<!--Jquery-->
+	<script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+	
+	<!--Bootstrap 5.3.6-->
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	
+	<!--Custom-->
+	<script th:src="@{/js/custom.js}"></script>
+</body>
+
+</html>
