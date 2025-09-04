@@ -1,5 +1,8 @@
 package br.com.zuco.model.service;
 
+import static br.com.zuco.mapper.ObjectDozerMapper.parseListObjects;
+import static br.com.zuco.mapper.ObjectDozerMapper.parseObject;
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.zuco.dto.EstiloDTO;
 import br.com.zuco.model.entity.Estilo;
 import br.com.zuco.model.repository.EstiloRepository;
 import br.com.zuco.model.service.exception.ResourceNotFoundException;
@@ -22,27 +26,29 @@ public class EstiloServiceImpl implements EstiloService {
 
 	@Override
 	@Transactional
-	public Estilo salvar(Estilo entity) {
+	public EstiloDTO salvar(EstiloDTO estiloDTO) {
 		_log.info("[Executando:" + Thread.currentThread().getStackTrace()[1].getMethodName() + "]");
 		
-		estiloRepository.save(entity);
+		var estilo = parseObject(estiloDTO, Estilo.class);
+		EstiloDTO estiloDTOSalvar = parseObject(estiloRepository.save(estilo), EstiloDTO.class);
 		
 		_log.info("[Registro salvo!]");
-		return entity;
+		return estiloDTOSalvar;
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	@Transactional
-	public Estilo atualizar(Estilo entity) {
+	public EstiloDTO atualizar(EstiloDTO estiloDTO) {
 		_log.info("[Executando:" + Thread.currentThread().getStackTrace()[1].getMethodName() + "]");
 		
-		Estilo estilo = estiloRepository.findById(entity.getEstiloId())
+		Estilo estilo = estiloRepository.findById(estiloDTO.getEstiloId())
 				.orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado!"));
-		estiloRepository.save(entity);
+		estilo.setEstiloNome(estiloDTO.getEstiloNome());
 
+		EstiloDTO estiloDTOSalvar = parseObject(estiloRepository.save(estilo), EstiloDTO.class);
+		
 		_log.info("[Registro atualizado!]");
-		return entity;
+		return estiloDTOSalvar;
 	}
 
 	@Override
@@ -58,17 +64,18 @@ public class EstiloServiceImpl implements EstiloService {
 	}
 
 	@Override
-	public List<Estilo> buscarTodos() {
+	public List<EstiloDTO> buscarTodos() {
 		_log.info("[Executando:" + Thread.currentThread().getStackTrace()[1].getMethodName() + "]");
 		
-		return estiloRepository.findAll();
+		return parseListObjects(estiloRepository.findAll(), EstiloDTO.class);
 	}
 
 	@Override
-	public Estilo buscarPorId(Long id) {
+	public EstiloDTO buscarPorId(Long id) {
 		_log.info("[Executando:" + Thread.currentThread().getStackTrace()[1].getMethodName() + "]");
 		
-		return estiloRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado!"));
+		var entity = estiloRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado!"));
+		return parseObject(entity, EstiloDTO.class);
 	}
 
 }

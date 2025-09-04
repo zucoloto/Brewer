@@ -2,17 +2,17 @@ package br.com.zuco.model.service;
 
 import java.util.List;
 
-import br.com.zuco.model.entity.Estilo;
+import br.com.zuco.dto.EstiloDTO;
 
 public interface EstiloService {
 
-	public Estilo salvar(Estilo entity);
+	public EstiloDTO salvar(EstiloDTO estiloDTO);
 	
-	public Estilo atualizar(Estilo entity);
+	public EstiloDTO atualizar(EstiloDTO estiloDTO);
 	
 	public void excluir(Long id);
 	
-	public List<Estilo> buscarTodos();
+	public List<EstiloDTO> buscarTodos();
 	
-	public Estilo buscarPorId(Long id);
+	public EstiloDTO buscarPorId(Long id);
 }

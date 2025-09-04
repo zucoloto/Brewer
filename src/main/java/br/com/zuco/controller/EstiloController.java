@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import br.com.zuco.model.entity.Estilo;
+import br.com.zuco.dto.EstiloDTO;
 import br.com.zuco.model.service.EstiloService;
 
 @RestController
@@ -18,12 +18,12 @@ public class EstiloController {
 	EstiloService estiloService;
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Estilo salvar(@RequestBody Estilo Estilo) {
-		return estiloService.salvar(Estilo);
+	public EstiloDTO salvar(@RequestBody EstiloDTO estilo) {
+		return estiloService.salvar(estilo);
 	}
 	
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Estilo atualizar(@RequestBody Estilo estilo) {
+	public EstiloDTO atualizar(@RequestBody EstiloDTO estilo) {
 		return estiloService.atualizar(estilo);
 	}
 	
@@ -34,12 +34,12 @@ public class EstiloController {
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Estilo> buscarTodos() {
+	public List<EstiloDTO> buscarTodos() {
 		return estiloService.buscarTodos();
 	}
 
 	@GetMapping(value = "/{estiloId}", produces = MediaType.APPLICATION_JSON_VALUE) 
-	public Estilo buscarPorId(@PathVariable("estiloId") Long id) {
+	public EstiloDTO buscarPorId(@PathVariable("estiloId") Long id) {
 		return estiloService.buscarPorId(id);
 	}
 }

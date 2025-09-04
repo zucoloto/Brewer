@@ -13,3 +13,11 @@
 2.2. Classe EstiloController com Rest
 
 2.3. Classe JPAConfig com @EnableTransactionManagement para controlar as transações
+
+3. DTO-Data Transfer Object e Mapping com Dozer
+
+3.1. Padrão de Projetos DTO-Data Transfer Object
+
+3.2. Mapping com Dozer
+
+3.3. Test DozerMapper
