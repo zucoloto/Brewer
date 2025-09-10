@@ -1,0 +1,57 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/layout}">
+
+<head><meta charset="UTF-8"/></head>
+
+<body>
+	<main layout:fragment="main">
+		<div class="card">
+		    <div class="card-header  d-flex">
+		        <span class="h4 mt-2  me-auto">Estilos</span>
+		        <a class="btn btn-link text-decoration-none mt-1" th:href="@{/estilo/novo}">Novo Estilo</a>
+		    </div>
+		
+		    <div class="card-body">
+		        <div class="table-responsive-sm">
+		            <table class="table table-bordered table-hover">
+		                <thead>
+			                <tr>
+			                    <th scope="col" class="text-center align-middle col-md-1">#</th>
+			                    <th scope="col" class="text-center align-middle">NOME</th>
+			                    <th scope="col" class="text-center align-middle col-md-2">AÇÃO</th>
+			                </tr>
+		                </thead>
+		                
+		                <tbody>
+		                    <tr th:each="estilo : ${todosEstilos}">
+		                        <td class="text-center" th:text="${estilo.estiloId}">ID</td>
+		                        <td th:text="${estilo.estiloNome}">ESTILO</td>
+		                        
+		                        <td class="text-center">
+		                            <a class="btn" th:href="@{/estilo/editar/{estiloId}(estiloId=${estilo.estiloId})}">
+		                                <i class="fa-regular fa-pen-to-square text-primary"></i>
+		                            </a>
+									
+									<button type="button" class="btn" 
+										data-bs-toggle="modal"
+										th:attr="data-bs-target='#confirmacaoExclusaoModal_'+${estilo.estiloId}" > 
+										<i class="fa-solid fa-xmark text-danger"></i>
+									</button>
+									
+									<div th:replace="~{estilo/modal_confimar_exclusao :: modal}"></div>
+									
+								</td>
+		                    </tr>
+		                    <tr>
+		                        <td colspan="3" th:if="${#lists.isEmpty(todosEstilos)}">Nenhum registro foi encontrado</td>
+		                    </tr>
+		                </tbody>
+		            </table>
+		        </div>
+		    </div>
+		</div>
+	</main>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head><meta charset="UTF-8"/></head>
+
+<body>
+	<!-- Modal -->
+	<div class="modal fade"
+		 th:id="confirmacaoExclusaoModal_+${estilo.estiloId}"
+	     tabindex="-1"
+	     data-bs-backdrop="static" data-bs-keyboard="false" th:fragment="modal">
+
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title fs-5">Atenção!</h4>
+					<button type="button" class="btn-close" 
+						data-bs-dismiss="modal"	aria-label="Close">
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<span>Tem certeza que deseja apagar o registro?</span>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+					
+					<a type="button" class="btn btn-primary" 
+						th:href="@{/estilo/excluir/{estiloId}(estiloId=${estilo.estiloId})}">
+						Excluir
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

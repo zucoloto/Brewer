@@ -21,3 +21,5 @@
 3.2. Mapping com Dozer
 
 3.3. Test DozerMapper
+
+4. CRUD da Classe Estilo

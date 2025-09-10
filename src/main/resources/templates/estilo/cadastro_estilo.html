@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/layout}">
+
+<head><meta charset="UTF-8"/></head>
+
+<body>
+	<main layout:fragment="main">
+		<div class="card">
+			<div class="card-header  d-flex">
+				<span class="h4 mt-2  me-auto">Novo de Estilo</span>
+				<a class="btn btn-link text-decoration-none mt-1" th:href="@{/estilo}">Voltar</a> 
+			</div>
+			
+			<div class="card-body">
+				<form method="POST" th:action="@{/estilo}" th:object="${estiloDTO}">
+					
+					<input type="hidden" name="_method" th:value="${estiloId != null} ? 'PUT' " />
+				
+					<input type="hidden" id="estiloId" th:field="*{estiloId}"/>
+					
+					<div class="row">
+						<div class="offset-md-2 offset-lg-3 col-12  col-md-8  col-lg-6">
+							<label class="form-label" for="estiloNome">Nome</label>
+							<input type="text" class="form-control" id="estiloNome" autofocus th:field="*{estiloNome}" >
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="offset-md-2 offset-lg-3 col-12  col-md-8  col-lg-6 mt-3">
+							<button type="submit" class="btn btn-primary">Salvar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</main>
+</body>
+
+</html>
