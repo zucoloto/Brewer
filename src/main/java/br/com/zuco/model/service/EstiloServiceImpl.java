@@ -4,6 +4,7 @@ import static br.com.zuco.mapper.ObjectDozerMapper.parseListObjects;
 import static br.com.zuco.mapper.ObjectDozerMapper.parseObject;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,12 @@ public class EstiloServiceImpl implements EstiloService {
 	public EstiloDTO salvar(EstiloDTO estiloDTO) {
 		_log.info("[Executando:" + Thread.currentThread().getStackTrace()[1].getMethodName() + "]");
 		
-		var estilo = parseObject(estiloDTO, Estilo.class);
+		Optional<Estilo> verEstiloDuplicado = estiloRepository.findByEstiloNomeIgnoreCase(estiloDTO.getEstiloNome());
+		if (verEstiloDuplicado.isPresent()) {
+			throw new ResourceNotFoundException("Nome do estilo já cadastrado.");
+		}
+		
+		Estilo estilo = parseObject(estiloDTO, Estilo.class);
 		EstiloDTO estiloDTOSalvar = parseObject(estiloRepository.save(estilo), EstiloDTO.class);
 		
 		_log.info("[Registro salvo!]");

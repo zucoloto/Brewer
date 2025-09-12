@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.zuco.dto.EstiloDTO;
 import br.com.zuco.model.service.EstiloService;
+import br.com.zuco.model.service.exception.ResourceNotFoundException;
 import jakarta.validation.Valid;
 
 @RestController
@@ -47,7 +48,14 @@ public class EstiloController {
 			return novo(estiloDTO);
 		}
 		
-		estiloService.salvar(estiloDTO);
+		try {
+			estiloService.salvar(estiloDTO);
+		} catch (ResourceNotFoundException e) {
+			result.rejectValue("estiloNome", e.getMessage(), e.getMessage());
+			System.out.println("estiloNome: " + "e.getMessage: " + e.getMessage());
+			return novo(estiloDTO);
+		}
+		
 		attributes.addFlashAttribute("sucesso", true);
 		attributes.addFlashAttribute("mensagem", "Registro cadastrado!");
 		ModelAndView mv = new ModelAndView("redirect:/estilo/novo");

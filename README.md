@@ -24,4 +24,6 @@
 
 4. CRUD da Classe Estilo
 
-5. Validação
+5. Validação na Classe Estilo
+
+6. Validação no nome do estilo duplicado
