@@ -46,33 +46,13 @@
 	<!--Bootstrap 5.3.6-->
 	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 	
+	<!--Bootstrap 5 - Validation-->
+	<script th:src="@{/js/needs.validation.js}"></script>
+	
 	<!--Custom-->
 	<script th:src="@{/js/custom.js}"></script>
 	
 	
-	<script type="text/javascript">
-	
-		var url = '';
-		
-		$('button[id*="btn_"]').click(function() {
-			url = "http://localhost:8080/" + $(this).attr('id').split("_")[1];
-		});
-		
-		$('#ok_confirm').click(function() {
-			document.location.href = url;
-		});
-	    
-		$(function() {
-			$('[data-toggle="popover"]').popover();
-		});
-		
-		$(document).ready(function(){
-		    $(".navbar-toggle").click(function(){
-		        $(".sidebar").toggleClass("sidebar-open");
-		    })
-		});
-
-	</script>
 	
 </body>
 

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.zuco.dto.EstiloDTO;
 import br.com.zuco.model.service.EstiloService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/estilo")
@@ -39,28 +40,44 @@ public class EstiloController {
     }
 	
 	@PostMapping
-	public ModelAndView salvar(EstiloDTO estiloDTO, BindingResult result, RedirectAttributes attributes) {
+	public ModelAndView salvar(@Valid EstiloDTO estiloDTO, BindingResult result, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
+			attributes.addFlashAttribute("error", true);
 			attributes.addFlashAttribute("mensagem", "Registro NÃO cadastrado!");
 			return novo(estiloDTO);
 		}
 		
 		estiloService.salvar(estiloDTO);
+		attributes.addFlashAttribute("sucesso", true);
+		attributes.addFlashAttribute("mensagem", "Registro cadastrado!");
 		ModelAndView mv = new ModelAndView("redirect:/estilo/novo");
 		return mv;
 	}
 	
 	@PutMapping
-	public ModelAndView atualizar(EstiloDTO estiloDTO) {
-		estiloService.atualizar(estiloDTO);
+	public ModelAndView atualizar(EstiloDTO estiloDTO, BindingResult result, RedirectAttributes attributes) {
 		ModelAndView mv = new ModelAndView("redirect:/estilo");
+		
+		if (result.hasErrors()) {
+			attributes.addFlashAttribute("error", true);
+			attributes.addFlashAttribute("mensagem", "Registro NÃO atualizado!");
+			return mv;
+		}
+		
+		estiloService.atualizar(estiloDTO);
+		attributes.addFlashAttribute("sucesso", true);
+		attributes.addFlashAttribute("mensagem", "Registro atualizado!");
 		return mv;
 	}
 	
 	@GetMapping("/excluir/{estiloId}")
-	public ModelAndView excluir(@PathVariable("estiloId") Long id) {
+	public ModelAndView excluir(@PathVariable("estiloId") Long id, RedirectAttributes attributes) {
+		ModelAndView mv = new ModelAndView("redirect:/estilo");
+		
 		estiloService.excluir(id);
-		return new ModelAndView("redirect:/estilo");
+		attributes.addFlashAttribute("sucesso", true);
+		attributes.addFlashAttribute("mensagem", "Registro excluído!");
+		return mv;
 	}
 	
 	@GetMapping

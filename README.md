@@ -23,3 +23,5 @@
 3.3. Test DozerMapper
 
 4. CRUD da Classe Estilo
+
+5. Validação

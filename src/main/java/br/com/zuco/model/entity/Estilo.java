@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "estilo")
@@ -22,7 +23,6 @@ public class Estilo implements Serializable {
 	@Column(name = "estilo_id")
 	private Long estiloId;
 	
-	@NotBlank(message = "O nome do Estilo é obrigatório.")
 	@Column(name = "estilo_nome")
 	private String estiloNome;
 

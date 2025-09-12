@@ -74,7 +74,8 @@ public class EstiloServiceImpl implements EstiloService {
 	public EstiloDTO buscarPorId(Long id) {
 		_log.info("[Executando:" + Thread.currentThread().getStackTrace()[1].getMethodName() + "]");
 		
-		var entity = estiloRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado!"));
+		var entity = estiloRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado!"));
 		return parseObject(entity, EstiloDTO.class);
 	}
 

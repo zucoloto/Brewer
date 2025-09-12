@@ -1,0 +1,15 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head><meta charset="UTF-8" /></head>
+
+<body>
+	<div class="alert alert-success alert-dismissible fade show  js-alert-tempo" role="alert"
+		th:if="${sucesso}">
+		<i class="fa-solid fa-circle-check"></i>
+	    <strong>Sucesso! </strong>
+	    <span th:text="${mensagem}"/>
+	    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+</body>
+
+</html>

@@ -3,11 +3,17 @@ package br.com.zuco.dto;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class EstiloDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Long estiloId;
+	
+	@NotBlank(message = "O nome do Estilo é obrigatório.")
+	@Size(max = 20, message = "O tamanho do nome não pode ser maior que {max} caracteres")
 	private String estiloNome;
 
 	public Long getEstiloId() {

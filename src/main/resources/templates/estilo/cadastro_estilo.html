@@ -13,7 +13,11 @@
 			</div>
 			
 			<div class="card-body">
-				<form method="POST" th:action="@{/estilo}" th:object="${estiloDTO}">
+				<form method="POST" th:action="@{/estilo}" th:object="${estiloDTO}" class="needs-validation" novalidate>
+				
+					<th:block th:include="~{layout/fragments/mensagem_sucesso}"></th:block>
+					<th:block th:include="~{layout/fragments/mensagem_erro}"></th:block>
+					<th:block th:include="~{layout/fragments/mensagem_erro_validacao}"></th:block>
 					
 					<input type="hidden" name="_method" th:value="${estiloId != null} ? 'PUT' " />
 				
@@ -22,7 +26,8 @@
 					<div class="row">
 						<div class="offset-md-2 offset-lg-3 col-12  col-md-8  col-lg-6">
 							<label class="form-label" for="estiloNome">Nome</label>
-							<input type="text" class="form-control" id="estiloNome" autofocus th:field="*{estiloNome}" >
+							<input type="text" class="form-control" id="estiloNome" autofocus
+								th:field="*{estiloNome}" th:errorclass="is-invalid">
 						</div>
 					</div>
 					
